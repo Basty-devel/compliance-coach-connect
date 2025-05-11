@@ -1,6 +1,6 @@
 
 import { Button } from '@/components/ui/button';
-import { Server, Lock, CheckCircle2 } from 'lucide-react';
+import { Server, Lock, CheckCircle2, Calendar } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { useUser } from '../context/UserContext';
@@ -23,11 +23,19 @@ const CTA = () => {
   };
 
   const handleContact = () => {
+    // In einem echten Projekt würde hier ein Formular oder eine E-Mail gesendet werden
     toast({
-      title: "Anfrage gesendet",
-      description: "Unser Vertriebsteam wird sich in Kürze bei Ihnen melden.",
+      title: "Demo Anfrage gesendet",
+      description: "Unser Vertriebsteam wird sich in Kürze bei Ihnen melden, um einen Demo-Termin zu vereinbaren.",
     });
-    // In a real app, this would open a contact form or send an email
+    
+    // Simulieren einer erfolgreichen Buchung nach 2 Sekunden
+    setTimeout(() => {
+      toast({
+        title: "Demo bestätigt!",
+        description: "Ihre Demo wurde für nächste Woche eingeplant. Eine E-Mail mit Details wurde an Sie gesendet.",
+      });
+    }, 2000);
   };
 
   return (
@@ -53,10 +61,11 @@ const CTA = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="bg-transparent text-white hover:bg-white hover:text-primary"
+              className="bg-transparent text-white hover:bg-white hover:text-primary flex items-center gap-2"
               onClick={handleContact}
             >
-              Vertrieb Kontaktieren
+              <Calendar className="h-5 w-5" />
+              Demo Buchen
             </Button>
           </div>
           
