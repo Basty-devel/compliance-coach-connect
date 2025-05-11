@@ -1,8 +1,35 @@
 
 import { Button } from '@/components/ui/button';
 import { Server, Lock, CheckCircle2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
+import { useUser } from '../context/UserContext';
 
 const CTA = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const { isAuthenticated } = useUser();
+
+  const handleStart = () => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    } else {
+      navigate('/login');
+    }
+    toast({
+      title: "Viel Erfolg!",
+      description: "Beginnen Sie jetzt mit Compliance Coach.",
+    });
+  };
+
+  const handleContact = () => {
+    toast({
+      title: "Anfrage gesendet",
+      description: "Unser Vertriebsteam wird sich in Kürze bei Ihnen melden.",
+    });
+    // In a real app, this would open a contact form or send an email
+  };
+
   return (
     <div className="py-16 bg-primary">
       <div className="container mx-auto px-4 md:px-6">
@@ -16,10 +43,19 @@ const CTA = () => {
           </p>
           
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button size="lg" variant="secondary">
+            <Button 
+              size="lg" 
+              variant="secondary"
+              onClick={handleStart}
+            >
               Jetzt Starten
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent text-white hover:bg-white hover:text-primary">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="bg-transparent text-white hover:bg-white hover:text-primary"
+              onClick={handleContact}
+            >
               Vertrieb Kontaktieren
             </Button>
           </div>

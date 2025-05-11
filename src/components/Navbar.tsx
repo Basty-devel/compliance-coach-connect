@@ -2,22 +2,35 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Shield, Menu, X, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
+import { useToast } from '@/hooks/use-toast';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const { isAuthenticated, user, logout } = useUser();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Erfolgreich abgemeldet",
+      description: "Vielen Dank für Ihren Besuch.",
+    });
+    navigate('/');
+    toggleMobileMenu();
   };
 
   return (
     <nav className="bg-white/80 backdrop-blur-md py-4 sticky top-0 z-50 border-b">
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center">
-          <Link to="/">
+          <Link to="/" className="flex items-center">
             <Shield className="h-8 w-8 text-primary mr-2" />
             <span className="font-bold text-xl text-primary">Compliance Coach</span>
           </Link>
@@ -36,7 +49,7 @@ const Navbar = () => {
               </Link>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-500">{user?.role}</span>
-                <Button variant="outline" size="sm" onClick={logout}>
+                <Button variant="outline" size="sm" onClick={handleLogout}>
                   Abmelden
                 </Button>
               </div>
@@ -91,10 +104,7 @@ const Navbar = () => {
                 >
                   Dashboard
                 </Link>
-                <Button className="w-full mt-2" variant="outline" onClick={() => {
-                  logout();
-                  toggleMobileMenu();
-                }}>
+                <Button className="w-full mt-2" variant="outline" onClick={handleLogout}>
                   Abmelden
                 </Button>
               </>

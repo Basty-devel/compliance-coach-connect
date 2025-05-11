@@ -8,33 +8,53 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Shield } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Login = () => {
   const { login } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
+  const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedRole, setSelectedRole] = useState<UserRole>('guest');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const from = location.state?.from?.pathname || '/dashboard';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
     // In a real app, you would validate credentials with a backend
     // This is just for demonstration purposes
     if (email && password) {
-      // Simulate successful login
-      login({
-        id: '1',
-        name: email.split('@')[0],
-        email,
-        role: selectedRole,
+      // Simulate a small delay for login
+      setTimeout(() => {
+        // Simulate successful login
+        login({
+          id: '1',
+          name: email.split('@')[0],
+          email,
+          role: selectedRole,
+        });
+        
+        toast({
+          title: "Erfolgreich angemeldet",
+          description: `Willkommen zurück als ${selectedRole}.`,
+        });
+        
+        // Redirect to the page they tried to visit or dashboard
+        navigate(from, { replace: true });
+        setIsSubmitting(false);
+      }, 800);
+    } else {
+      toast({
+        title: "Anmeldung fehlgeschlagen",
+        description: "Bitte füllen Sie alle Felder aus.",
+        variant: "destructive",
       });
-      
-      // Redirect to the page they tried to visit or dashboard
-      navigate(from, { replace: true });
+      setIsSubmitting(false);
     }
   };
 
@@ -95,8 +115,12 @@ const Login = () => {
           </form>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" onClick={handleSubmit}>
-            Anmelden
+          <Button 
+            className="w-full" 
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Wird angemeldet..." : "Anmelden"}
           </Button>
         </CardFooter>
       </Card>

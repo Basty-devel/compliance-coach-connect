@@ -4,9 +4,22 @@ import { useUser } from '../context/UserContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, Lock, CheckCircle2, User, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
 
 const Dashboard = () => {
   const { user, logout } = useUser();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Erfolgreich abgemeldet",
+      description: "Vielen Dank für Ihren Besuch.",
+    });
+    navigate('/');
+  };
 
   // Different dashboard content based on user role
   const renderRoleSpecificContent = () => {
@@ -146,7 +159,7 @@ const Dashboard = () => {
             Willkommen, {user?.name} ({user?.role})
           </p>
         </div>
-        <Button variant="outline" onClick={logout}>
+        <Button variant="outline" onClick={handleLogout}>
           Abmelden
         </Button>
       </div>
