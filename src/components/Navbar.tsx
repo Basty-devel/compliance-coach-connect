@@ -20,10 +20,10 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
-          <a href="#features" className="text-gray-700 hover:text-primary transition-colors">Features</a>
-          <a href="#security" className="text-gray-700 hover:text-primary transition-colors">Security</a>
-          <a href="#communication" className="text-gray-700 hover:text-primary transition-colors">Communication</a>
-          <Button size="sm">Get Started</Button>
+          <a href="#features" className="text-gray-700 hover:text-primary transition-colors">Funktionen</a>
+          <a href="#security" className="text-gray-700 hover:text-primary transition-colors">Sicherheit</a>
+          <a href="#communication" className="text-gray-700 hover:text-primary transition-colors">Kommunikation</a>
+          <Button size="sm">Jetzt Starten</Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -43,23 +43,23 @@ const Navbar = () => {
               className="text-gray-700 hover:text-primary transition-colors py-2"
               onClick={toggleMobileMenu}
             >
-              Features
+              Funktionen
             </a>
             <a 
               href="#security" 
               className="text-gray-700 hover:text-primary transition-colors py-2"
               onClick={toggleMobileMenu}
             >
-              Security
+              Sicherheit
             </a>
             <a 
               href="#communication" 
               className="text-gray-700 hover:text-primary transition-colors py-2"
               onClick={toggleMobileMenu}
             >
-              Communication
+              Kommunikation
             </a>
-            <Button className="w-full mt-2">Get Started</Button>
+            <Button className="w-full mt-2">Jetzt Starten</Button>
           </div>
         </div>
       )}

@@ -9,21 +9,21 @@ const Communication = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
             <MessageCircle className="h-4 w-4 mr-2" />
-            Seamless Communication
+            Nahtlose Kommunikation
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-            Connecting Teachers and Parents
+            Verbindung zwischen Lehrern und Eltern
           </h2>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-            Enhance the educational experience with tools designed to improve communication and classroom management.
+            Verbessern Sie das Bildungserlebnis mit Tools, die zur Verbesserung der Kommunikation und des Klassenmanagements entwickelt wurden.
           </p>
         </div>
 
         <Tabs defaultValue="messaging" className="w-full">
           <div className="flex justify-center mb-8">
             <TabsList className="grid grid-cols-2 w-full max-w-md">
-              <TabsTrigger value="messaging">Push Messaging</TabsTrigger>
-              <TabsTrigger value="classbook">Virtual Classbook</TabsTrigger>
+              <TabsTrigger value="messaging">Push-Nachrichten</TabsTrigger>
+              <TabsTrigger value="classbook">Virtuelles Klassenbuch</TabsTrigger>
             </TabsList>
           </div>
           
@@ -31,29 +31,29 @@ const Communication = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6 order-2 lg:order-1">
                 <h3 className="text-2xl font-bold text-gray-900">
-                  Real-Time Messaging That Connects
+                  Echtzeit-Messaging, das verbindet
                 </h3>
                 <p className="text-lg text-gray-600">
-                  Our push messaging system creates a direct communication channel between teachers and parents, 
-                  ensuring important updates are delivered instantly.
+                  Unser Push-Messaging-System schafft einen direkten Kommunikationskanal zwischen Lehrern und Eltern 
+                  und stellt sicher, dass wichtige Updates sofort übermittelt werden.
                 </p>
                 
                 <div className="space-y-4 mt-6">
                   {[
                     {
                       icon: Bell,
-                      title: "Instant Notifications",
-                      description: "Send real-time alerts about attendance, grades, and school activities."
+                      title: "Sofortige Benachrichtigungen",
+                      description: "Senden Sie Echtzeitwarnungen zu Anwesenheit, Noten und Schulaktivitäten."
                     },
                     {
                       icon: User,
-                      title: "Personalized Communication",
-                      description: "Deliver targeted messages directly to specific parents regarding their child."
+                      title: "Personalisierte Kommunikation",
+                      description: "Übermitteln Sie gezielte Nachrichten direkt an bestimmte Eltern bezüglich ihres Kindes."
                     },
                     {
                       icon: CheckCircle2,
-                      title: "Delivery Confirmation",
-                      description: "Verify when messages have been received and read by parents."
+                      title: "Zustellbestätigung",
+                      description: "Überprüfen Sie, wann Nachrichten von Eltern empfangen und gelesen wurden."
                     }
                   ].map((item, i) => (
                     <div key={i} className="flex">
@@ -74,23 +74,23 @@ const Communication = () => {
                   <div className="bg-primary p-4 text-white flex items-center justify-between">
                     <div className="flex items-center">
                       <MessageCircle className="h-5 w-5 mr-2" />
-                      <span className="font-semibold">School Updates</span>
+                      <span className="font-semibold">Schulupdates</span>
                     </div>
                     <Bell className="h-5 w-5" />
                   </div>
                   <div className="p-4 space-y-4">
                     {[
                       {
-                        title: "Math Quiz Tomorrow",
-                        message: "Please remind Emma to bring her calculator for tomorrow's math quiz covering chapters 5-7.",
-                        time: "10:30 AM",
-                        sender: "Mr. Johnson"
+                        title: "Mathe-Test morgen",
+                        message: "Bitte erinnern Sie Emma daran, ihren Taschenrechner für den morgigen Mathetest mitzubringen, der die Kapitel 5-7 abdeckt.",
+                        time: "10:30 Uhr",
+                        sender: "Herr Schmidt"
                       },
                       {
-                        title: "Field Trip Permission",
-                        message: "The science museum field trip permission slip is due by Friday. Please sign and return it with Emma.",
-                        time: "Yesterday",
-                        sender: "School Admin"
+                        title: "Genehmigung für Ausflug",
+                        message: "Der Erlaubnisschein für den Ausflug zum Wissenschaftsmuseum muss bis Freitag eingereicht werden. Bitte unterschreiben und mit Emma zurücksenden.",
+                        time: "Gestern",
+                        sender: "Schulverwaltung"
                       }
                     ].map((message, i) => (
                       <div key={i} className="bg-gray-50 rounded-lg p-3">
@@ -99,12 +99,12 @@ const Communication = () => {
                           <span className="text-sm text-gray-500">{message.time}</span>
                         </div>
                         <p className="text-gray-700 text-sm mt-1">{message.message}</p>
-                        <div className="mt-2 text-xs text-right text-gray-500">From: {message.sender}</div>
+                        <div className="mt-2 text-xs text-right text-gray-500">Von: {message.sender}</div>
                       </div>
                     ))}
                     
                     <div className="h-10 flex items-center justify-center border-t text-primary text-sm font-medium cursor-pointer">
-                      View All Messages
+                      Alle Nachrichten anzeigen
                     </div>
                   </div>
                 </div>
@@ -119,46 +119,46 @@ const Communication = () => {
                   <div className="bg-secondary p-4 text-white flex items-center justify-between">
                     <div className="flex items-center">
                       <BookOpen className="h-5 w-5 mr-2" />
-                      <span className="font-semibold">Virtual Classbook</span>
+                      <span className="font-semibold">Virtuelles Klassenbuch</span>
                     </div>
                     <Calendar className="h-5 w-5" />
                   </div>
                   <div className="p-4">
-                    <h4 className="font-semibold mb-3">Class 7B - Weekly Overview</h4>
+                    <h4 className="font-semibold mb-3">Klasse 7B - Wochenübersicht</h4>
                     <div className="space-y-3">
                       <div className="bg-gray-50 p-3 rounded-lg">
                         <div className="flex justify-between">
-                          <span className="font-medium">Mathematics</span>
-                          <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">92% Attendance</span>
+                          <span className="font-medium">Mathematik</span>
+                          <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">92% Anwesenheit</span>
                         </div>
-                        <p className="text-sm mt-1">Topics: Quadratic Equations, Probability</p>
+                        <p className="text-sm mt-1">Themen: Quadratische Gleichungen, Wahrscheinlichkeit</p>
                         <div className="flex items-center mt-2 text-sm text-gray-600">
                           <div className="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
-                          <span>Homework due Friday</span>
+                          <span>Hausaufgabe fällig am Freitag</span>
                         </div>
                       </div>
                       
                       <div className="bg-gray-50 p-3 rounded-lg">
                         <div className="flex justify-between">
-                          <span className="font-medium">Science</span>
-                          <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">96% Attendance</span>
+                          <span className="font-medium">Naturwissenschaft</span>
+                          <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">96% Anwesenheit</span>
                         </div>
-                        <p className="text-sm mt-1">Topics: Photosynthesis, Cell Division</p>
+                        <p className="text-sm mt-1">Themen: Photosynthese, Zellteilung</p>
                         <div className="flex items-center mt-2 text-sm text-gray-600">
                           <div className="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
-                          <span>Test on Monday</span>
+                          <span>Test am Montag</span>
                         </div>
                       </div>
                       
                       <div className="bg-gray-50 p-3 rounded-lg">
                         <div className="flex justify-between">
-                          <span className="font-medium">English Literature</span>
-                          <span className="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded">85% Attendance</span>
+                          <span className="font-medium">Deutsche Literatur</span>
+                          <span className="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded">85% Anwesenheit</span>
                         </div>
-                        <p className="text-sm mt-1">Topics: Shakespeare's Sonnets</p>
+                        <p className="text-sm mt-1">Themen: Goethes Gedichte</p>
                         <div className="flex items-center mt-2 text-sm text-gray-600">
                           <div className="w-2 h-2 bg-blue-500 rounded-full mr-1"></div>
-                          <span>Essay submission next Tuesday</span>
+                          <span>Aufsatzabgabe nächsten Dienstag</span>
                         </div>
                       </div>
                     </div>
@@ -168,29 +168,29 @@ const Communication = () => {
               
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-gray-900">
-                  Digital Classbook at Your Fingertips
+                  Digitales Klassenbuch immer griffbereit
                 </h3>
                 <p className="text-lg text-gray-600">
-                  Our Virtual Classbook simplifies classroom management by digitizing attendance, 
-                  assignments, grades, and student performance tracking.
+                  Unser virtuelles Klassenbuch vereinfacht das Klassenmanagement durch Digitalisierung von Anwesenheit, 
+                  Aufgaben, Noten und Schülerleistungsverfolgung.
                 </p>
                 
                 <div className="space-y-4 mt-6">
                   {[
                     {
                       icon: BookOpen,
-                      title: "Comprehensive Tracking",
-                      description: "Track attendance, assignments, grades, and student performance in one place."
+                      title: "Umfassende Nachverfolgung",
+                      description: "Verfolgen Sie Anwesenheit, Aufgaben, Noten und Schülerleistung an einem Ort."
                     },
                     {
                       icon: Bell,
-                      title: "Real-time Updates",
-                      description: "Parents receive instant updates about their child's performance and attendance."
+                      title: "Echtzeit-Updates",
+                      description: "Eltern erhalten sofortige Updates über die Leistung und Anwesenheit ihres Kindes."
                     },
                     {
                       icon: Calendar,
-                      title: "Integrated Planning",
-                      description: "Plan lessons, assignments, and parent-teacher meetings with our integrated calendar."
+                      title: "Integrierte Planung",
+                      description: "Planen Sie Unterricht, Aufgaben und Elterngespräche mit unserem integrierten Kalender."
                     }
                   ].map((item, i) => (
                     <div key={i} className="flex">

@@ -10,34 +10,34 @@ const Security = () => {
           <div className="space-y-6">
             <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Lock className="h-4 w-4 mr-2" />
-              Industry-Leading Security
+              Branchenführende Sicherheit
             </div>
             
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-              Your Data, Protected by Multiple Layers of Security
+              Ihre Daten, geschützt durch mehrere Sicherheitsebenen
             </h2>
             
             <p className="text-xl text-gray-600">
-              We take security seriously, implementing the highest standards to ensure your sensitive data 
-              remains protected at all times.
+              Wir nehmen Sicherheit ernst und implementieren höchste Standards, um sicherzustellen, 
+              dass Ihre sensiblen Daten jederzeit geschützt bleiben.
             </p>
             
             <div className="space-y-4 mt-8">
               {[
                 {
                   icon: Shield,
-                  title: "AES-256 Encryption",
-                  description: "All sensitive data is secured with military-grade encryption both in transit and at rest."
+                  title: "AES-256-Verschlüsselung",
+                  description: "Alle sensiblen Daten werden mit militärischer Verschlüsselung sowohl bei der Übertragung als auch im Ruhezustand gesichert."
                 },
                 {
                   icon: CheckSquare,
-                  title: "Two-Factor Authentication",
-                  description: "An additional security layer requiring two verification methods to access your account."
+                  title: "Zwei-Faktor-Authentifizierung",
+                  description: "Eine zusätzliche Sicherheitsebene, die zwei Verifizierungsmethoden erfordert, um auf Ihr Konto zuzugreifen."
                 },
                 {
                   icon: Server,
-                  title: "GDPR-Compliant Infrastructure",
-                  description: "Our infrastructure is designed from the ground up to meet strict EU data protection standards."
+                  title: "DSGVO-konforme Infrastruktur",
+                  description: "Unsere Infrastruktur ist von Grund auf darauf ausgelegt, strenge EU-Datenschutzstandards zu erfüllen."
                 }
               ].map((item, i) => (
                 <div key={i} className="flex">
@@ -70,14 +70,14 @@ const Security = () => {
                   </div>
                   
                   <div>
-                    <h3 className="text-xl font-bold text-center">Data Protection Layers</h3>
+                    <h3 className="text-xl font-bold text-center">Datenschutzebenen</h3>
                     <div className="mt-4 space-y-2">
                       {[
-                        "Application Level Encryption",
-                        "Transport Layer Security",
-                        "Database Encryption",
-                        "Physical Security Measures",
-                        "Regular Security Audits"
+                        "Anwendungsebenen-Verschlüsselung",
+                        "Transportschichtsicherheit",
+                        "Datenbank-Verschlüsselung",
+                        "Physische Sicherheitsmaßnahmen",
+                        "Regelmäßige Sicherheitsaudits"
                       ].map((layer, i) => (
                         <div key={i} className="bg-gray-50 p-3 rounded-lg flex items-center">
                           <div className="h-2 w-2 rounded-full bg-primary mr-3"></div>

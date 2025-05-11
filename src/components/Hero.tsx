@@ -10,35 +10,35 @@ const Hero = () => {
           <div className="space-y-6">
             <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Shield className="h-4 w-4 mr-2" />
-              GDPR · ISO 27001 · NIS2 Compliant
+              DSGVO · ISO 27001 · NIS2 konform
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-              Streamline Your 
+              Vereinfachen Sie Ihr 
               <span className="text-primary"> Compliance</span> 
               <br />Management
             </h1>
             
             <p className="text-xl text-gray-600 max-w-2xl">
-              A comprehensive compliance management platform with integrated educational tools. 
-              Ensuring data privacy, simplifying compliance, and enhancing teacher-parent communication.
+              Eine umfassende Compliance-Management-Plattform mit integrierten Bildungstools. 
+              Gewährleistung des Datenschutzes, Vereinfachung der Compliance und Verbesserung der Lehrer-Eltern-Kommunikation.
             </p>
             
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg">
-                Get Started
+                Jetzt Starten
               </Button>
               <Button variant="outline" size="lg">
-                Book a Demo
+                Demo Buchen
               </Button>
             </div>
             
             <div className="pt-6">
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
                 {[
-                  'End-to-End Encryption', 
-                  'Real-time Monitoring', 
-                  'Virtual Classbook'
+                  'Ende-zu-Ende Verschlüsselung', 
+                  'Echtzeit-Überwachung', 
+                  'Virtuelles Klassenbuch'
                 ].map((feature) => (
                   <div key={feature} className="flex items-center">
                     <CheckCircle2 className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
@@ -60,10 +60,10 @@ const Hero = () => {
                 
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { name: 'GDPR', status: 'Compliant', color: 'compliance.green' },
-                    { name: 'ISO 27001', status: 'In Progress', color: 'compliance.yellow' },
-                    { name: 'NIS2', status: 'Compliant', color: 'compliance.green' },
-                    { name: 'AES 256 Encryption', status: 'Active', color: 'compliance.blue' }
+                    { name: 'DSGVO', status: 'Konform', color: 'compliance.green' },
+                    { name: 'ISO 27001', status: 'In Bearbeitung', color: 'compliance.yellow' },
+                    { name: 'NIS2', status: 'Konform', color: 'compliance.green' },
+                    { name: 'AES 256 Verschlüsselung', status: 'Aktiv', color: 'compliance.blue' }
                   ].map((item) => (
                     <div 
                       key={item.name} 
@@ -80,8 +80,8 @@ const Hero = () => {
                 </div>
                 
                 <div className="bg-gray-50 p-4 rounded-lg">
-                  <p className="text-sm font-medium">Next Compliance Audit</p>
-                  <p className="text-lg font-semibold mt-1">June 15, 2025</p>
+                  <p className="text-sm font-medium">Nächstes Compliance-Audit</p>
+                  <p className="text-lg font-semibold mt-1">15. Juni 2025</p>
                   <div className="h-2 bg-gray-200 rounded-full mt-2">
                     <div className="h-2 bg-primary rounded-full w-3/4"></div>
                   </div>

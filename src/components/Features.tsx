@@ -15,38 +15,38 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 const featuresList = [
   {
-    title: "End-to-End Encryption",
-    description: "All data protected with AES-256 encryption and Two-Factor Authentication for maximum security.",
+    title: "Ende-zu-Ende-Verschlüsselung",
+    description: "Alle Daten geschützt mit AES-256-Verschlüsselung und Zwei-Faktor-Authentifizierung für maximale Sicherheit.",
     icon: Shield,
     color: "bg-blue-50 text-blue-600"
   },
   {
-    title: "Real-Time Compliance Monitoring",
-    description: "Monitor compliance status with GDPR, ISO 27001, and NIS2 with instant alerts for regulatory changes.",
+    title: "Echtzeit-Compliance-Überwachung",
+    description: "Überwachen Sie den Compliance-Status mit DSGVO, ISO 27001 und NIS2 mit sofortigen Warnungen bei regulatorischen Änderungen.",
     icon: Bell,
     color: "bg-green-50 text-green-600"
   },
   {
-    title: "Automated Data Protection Audits",
-    description: "AI-driven Audit Chatbot that guides you through creating compliance documents like Privacy Policies.",
+    title: "Automatisierte Datenschutz-Audits",
+    description: "KI-gesteuerter Audit-Chatbot, der Sie durch die Erstellung von Compliance-Dokumenten wie Datenschutzerklärungen führt.",
     icon: FileCheck,
     color: "bg-purple-50 text-purple-600"
   },
   {
-    title: "Risk Assessment Tool",
-    description: "Automated risk analysis for third-party tools with real-time scoring and vulnerability visualization.",
+    title: "Risikobewertungstool",
+    description: "Automatisierte Risikoanalyse für Tools von Drittanbietern mit Echtzeit-Bewertung und Visualisierung von Schwachstellen.",
     icon: AlertCircle,
     color: "bg-yellow-50 text-yellow-600"
   },
   {
-    title: "Compliance Dashboard",
-    description: "Centralized dashboard providing overview of your organization's compliance health and deadlines.",
+    title: "Compliance-Dashboard",
+    description: "Zentralisiertes Dashboard mit Überblick über die Compliance-Gesundheit Ihrer Organisation und wichtige Fristen.",
     icon: BarChart,
     color: "bg-indigo-50 text-indigo-600"
   },
   {
-    title: "Document Management",
-    description: "Secure document storage system with built-in digital signature functionality for compliance documents.",
+    title: "Dokumentenverwaltung",
+    description: "Sicheres Dokumentenspeichersystem mit integrierter digitaler Signaturfunktion für Compliance-Dokumente.",
     icon: FileText,
     color: "bg-pink-50 text-pink-600"
   }
@@ -54,26 +54,26 @@ const featuresList = [
 
 const educationalFeatures = [
   {
-    title: "Interactive Compliance Training",
-    description: "Training modules for employees with progress tracking and digital completion certificates.",
+    title: "Interaktive Compliance-Schulung",
+    description: "Schulungsmodule für Mitarbeiter mit Fortschrittsverfolgung und digitalen Abschlusszertifikaten.",
     icon: GraduationCap,
     color: "bg-teal-50 text-teal-600"
   },
   {
-    title: "Multi-Language Support",
-    description: "Compliance training and documentation accessible to users across the globe in multiple languages.",
+    title: "Mehrsprachige Unterstützung",
+    description: "Compliance-Schulungen und -Dokumentation für Benutzer weltweit in mehreren Sprachen zugänglich.",
     icon: Globe,
     color: "bg-orange-50 text-orange-600"
   },
   {
-    title: "Push Messaging System",
-    description: "Real-time communication between teachers and parents regarding important updates and activities.",
+    title: "Push-Nachrichtensystem",
+    description: "Echtzeitkommunikation zwischen Lehrern und Eltern bezüglich wichtiger Updates und Aktivitäten.",
     icon: MessageCircle,
     color: "bg-red-50 text-red-600"
   },
   {
-    title: "Virtual Classbook",
-    description: "Digital tracking of attendance, assignments, grades and student performance with real-time updates.",
+    title: "Virtuelles Klassenbuch",
+    description: "Digitale Erfassung von Anwesenheit, Aufgaben, Noten und Schülerleistungen mit Echtzeit-Updates.",
     icon: BookOpen,
     color: "bg-emerald-50 text-emerald-600"
   }
@@ -85,10 +85,10 @@ const Features = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Comprehensive Compliance Management
+            Umfassendes Compliance-Management
           </h2>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-            Simplify your compliance journey with our complete suite of tools designed for data protection and privacy requirements.
+            Vereinfachen Sie Ihren Compliance-Prozess mit unserer kompletten Palette von Tools für Datenschutz- und Datensicherheitsanforderungen.
           </p>
         </div>
         
@@ -112,10 +112,10 @@ const Features = () => {
         
         <div className="mt-24 text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Educational Tools & Communication
+            Bildungstools & Kommunikation
           </h2>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-            Enhance the learning experience with integrated tools for classroom management and parent communication.
+            Verbessern Sie das Lernerlebnis mit integrierten Tools für Klassenraummanagement und Elternkommunikation.
           </p>
         </div>
         

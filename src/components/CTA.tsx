@@ -8,19 +8,19 @@ const CTA = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white">
-            Ready to Transform Your Compliance Management?
+            Bereit, Ihr Compliance-Management zu transformieren?
           </h2>
           <p className="mt-4 text-xl text-white/80">
-            Join thousands of organizations that trust Compliance Coach to simplify 
-            compliance and enhance educational communication.
+            Schließen Sie sich tausenden Organisationen an, die Compliance Coach vertrauen, um die 
+            Einhaltung von Vorschriften zu vereinfachen und die pädagogische Kommunikation zu verbessern.
           </p>
           
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" variant="secondary">
-              Get Started Now
+              Jetzt Starten
             </Button>
             <Button size="lg" variant="outline" className="bg-transparent text-white hover:bg-white hover:text-primary">
-              Contact Sales
+              Vertrieb Kontaktieren
             </Button>
           </div>
           
@@ -28,15 +28,15 @@ const CTA = () => {
             {[
               {
                 icon: Server,
-                text: "GDPR, ISO 27001 & NIS2 Compliant"
+                text: "DSGVO, ISO 27001 & NIS2 konform"
               },
               {
                 icon: Lock,
-                text: "AES-256 End-to-End Encryption"
+                text: "AES-256 Ende-zu-Ende-Verschlüsselung"
               },
               {
                 icon: CheckCircle2,
-                text: "99.9% Uptime Guarantee"
+                text: "99,9% Verfügbarkeitsgarantie"
               }
             ].map((item, i) => (
               <div key={i} className="flex items-center justify-center">
