@@ -1,10 +1,13 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Shield, Menu, X } from 'lucide-react';
+import { Shield, Menu, X, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const { isAuthenticated, user, logout } = useUser();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -14,8 +17,10 @@ const Navbar = () => {
     <nav className="bg-white/80 backdrop-blur-md py-4 sticky top-0 z-50 border-b">
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center">
-          <Shield className="h-8 w-8 text-primary mr-2" />
-          <span className="font-bold text-xl text-primary">Compliance Coach</span>
+          <Link to="/">
+            <Shield className="h-8 w-8 text-primary mr-2" />
+            <span className="font-bold text-xl text-primary">Compliance Coach</span>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -23,7 +28,24 @@ const Navbar = () => {
           <a href="#features" className="text-gray-700 hover:text-primary transition-colors">Funktionen</a>
           <a href="#security" className="text-gray-700 hover:text-primary transition-colors">Sicherheit</a>
           <a href="#communication" className="text-gray-700 hover:text-primary transition-colors">Kommunikation</a>
-          <Button size="sm">Jetzt Starten</Button>
+          
+          {isAuthenticated ? (
+            <div className="flex items-center gap-4">
+              <Link to="/dashboard" className="text-gray-700 hover:text-primary transition-colors">
+                Dashboard
+              </Link>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">{user?.role}</span>
+                <Button variant="outline" size="sm" onClick={logout}>
+                  Abmelden
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <Link to="/login">
+              <Button size="sm">Anmelden</Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -59,7 +81,28 @@ const Navbar = () => {
             >
               Kommunikation
             </a>
-            <Button className="w-full mt-2">Jetzt Starten</Button>
+            
+            {isAuthenticated ? (
+              <>
+                <Link 
+                  to="/dashboard" 
+                  className="text-gray-700 hover:text-primary transition-colors py-2"
+                  onClick={toggleMobileMenu}
+                >
+                  Dashboard
+                </Link>
+                <Button className="w-full mt-2" variant="outline" onClick={() => {
+                  logout();
+                  toggleMobileMenu();
+                }}>
+                  Abmelden
+                </Button>
+              </>
+            ) : (
+              <Link to="/login" onClick={toggleMobileMenu}>
+                <Button className="w-full mt-2">Anmelden</Button>
+              </Link>
+            )}
           </div>
         </div>
       )}
