@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Bell, MessageCircle, User, CheckCircle2, Send, AlertTriangle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -70,7 +69,7 @@ const MessagingTab = () => {
       time: "10:30 Uhr",
       sender: "Herr Schmidt",
       category: "academic",
-      priority: "normal",
+      priority: "normal" as "normal",
       status: "sent"
     },
     {
@@ -80,7 +79,7 @@ const MessagingTab = () => {
       time: "Gestern",
       sender: "Schulverwaltung",
       category: "event",
-      priority: "high",
+      priority: "high" as "high",
       status: "read"
     },
     {
@@ -90,7 +89,7 @@ const MessagingTab = () => {
       time: "Vor 2 Tagen",
       sender: "Frau Müller",
       category: "academic",
-      priority: "urgent",
+      priority: "urgent" as "urgent",
       status: "unread"
     }
   ];
