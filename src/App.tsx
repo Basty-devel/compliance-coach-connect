@@ -46,6 +46,11 @@ const App = () => (
               {/* Add parent-specific routes here */}
             </Route>
             
+            {/* Student only routes */}
+            <Route element={<ProtectedRoute allowedRoles={['student', 'admin']} />}>
+              {/* Add student-specific routes here */}
+            </Route>
+            
             {/* Catch-all route */}
             <Route path="*" element={<NotFound />} />
           </Routes>

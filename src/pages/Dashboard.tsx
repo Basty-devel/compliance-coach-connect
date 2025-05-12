@@ -3,7 +3,7 @@ import React from 'react';
 import { useUser } from '../context/UserContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Shield, Lock, CheckCircle2, User, Users } from 'lucide-react';
+import { Shield, Lock, CheckCircle2, User, Users, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 
@@ -135,6 +135,47 @@ const Dashboard = () => {
             </Card>
           </div>
         );
+      case 'student':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <BookOpen className="h-5 w-5 mr-2" />
+                  Hausaufgaben
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-bold">5</p>
+                <p className="text-sm text-muted-foreground">Offene Hausaufgaben</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <CheckCircle2 className="h-5 w-5 mr-2" />
+                  Noten
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-bold">2,3</p>
+                <p className="text-sm text-muted-foreground">Notendurchschnitt</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Users className="h-5 w-5 mr-2" />
+                  Anwesenheit
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-bold">95%</p>
+                <p className="text-sm text-muted-foreground">Anwesenheitsrate</p>
+              </CardContent>
+            </Card>
+          </div>
+        );
       default:
         return (
           <Card className="mb-8">
@@ -169,9 +210,19 @@ const Dashboard = () => {
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Letzte Aktivitäten</h2>
         <div className="space-y-2">
-          <p className="p-2 bg-gray-50 rounded-md">Dokument "Datenschutzerklärung" wurde aktualisiert</p>
-          <p className="p-2 bg-gray-50 rounded-md">Neues Compliance-Training verfügbar</p>
-          <p className="p-2 bg-gray-50 rounded-md">Risikobewertung für "MS Teams" abgeschlossen</p>
+          {user?.role === 'student' ? (
+            <>
+              <p className="p-2 bg-gray-50 rounded-md">Neue Hausaufgabe in Mathematik wurde zugewiesen</p>
+              <p className="p-2 bg-gray-50 rounded-md">Klassenarbeit in Deutsch am Freitag</p>
+              <p className="p-2 bg-gray-50 rounded-md">Neue Nachricht vom Klassenlehrer</p>
+            </>
+          ) : (
+            <>
+              <p className="p-2 bg-gray-50 rounded-md">Dokument "Datenschutzerklärung" wurde aktualisiert</p>
+              <p className="p-2 bg-gray-50 rounded-md">Neues Compliance-Training verfügbar</p>
+              <p className="p-2 bg-gray-50 rounded-md">Risikobewertung für "MS Teams" abgeschlossen</p>
+            </>
+          )}
         </div>
       </div>
     </div>

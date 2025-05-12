@@ -105,6 +105,7 @@ const Login = () => {
                   <SelectItem value="admin">Administrator</SelectItem>
                   <SelectItem value="teacher">Lehrer</SelectItem>
                   <SelectItem value="parent">Eltern</SelectItem>
+                  <SelectItem value="student">Schüler</SelectItem>
                   <SelectItem value="guest">Gast</SelectItem>
                 </SelectContent>
               </Select>
