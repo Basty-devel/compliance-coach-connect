@@ -1,5 +1,11 @@
 
-import { BookOpen, Bell, Calendar } from 'lucide-react';
+import React, { useState } from 'react';
+import { BookOpen, Bell, Calendar, Users, CheckCircle2, Star } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AttendanceTracker from './classbook/AttendanceTracker';
+import AssignmentManager from './classbook/AssignmentManager';
+import StudentPerformance from './classbook/StudentPerformance';
+import ClassCalendar from './classbook/ClassCalendar';
 
 const ClassbookFeatureItem = ({ 
   icon: Icon, 
@@ -23,35 +29,9 @@ const ClassbookFeatureItem = ({
   );
 };
 
-const ClassSubject = ({ 
-  subject, 
-  attendance, 
-  topics, 
-  alert, 
-  alertColor 
-}: { 
-  subject: string; 
-  attendance: string; 
-  topics: string; 
-  alert: string; 
-  alertColor: string;
-}) => {
-  return (
-    <div className="bg-gray-50 p-3 rounded-lg">
-      <div className="flex justify-between">
-        <span className="font-medium">{subject}</span>
-        <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">{attendance}</span>
-      </div>
-      <p className="text-sm mt-1">Themen: {topics}</p>
-      <div className="flex items-center mt-2 text-sm text-gray-600">
-        <div className={`w-2 h-2 bg-${alertColor}-500 rounded-full mr-1`}></div>
-        <span>{alert}</span>
-      </div>
-    </div>
-  );
-};
-
 const ClassbookTab = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+  
   const classbookFeatures = [
     {
       icon: BookOpen,
@@ -70,59 +50,8 @@ const ClassbookTab = () => {
     }
   ];
 
-  const subjects = [
-    {
-      subject: "Mathematik",
-      attendance: "92% Anwesenheit",
-      topics: "Quadratische Gleichungen, Wahrscheinlichkeit",
-      alert: "Hausaufgabe fällig am Freitag",
-      alertColor: "yellow"
-    },
-    {
-      subject: "Naturwissenschaft",
-      attendance: "96% Anwesenheit",
-      topics: "Photosynthese, Zellteilung",
-      alert: "Test am Montag",
-      alertColor: "red"
-    },
-    {
-      subject: "Deutsche Literatur",
-      attendance: "85% Anwesenheit",
-      topics: "Goethes Gedichte",
-      alert: "Aufsatzabgabe nächsten Dienstag",
-      alertColor: "blue"
-    }
-  ];
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div className="relative">
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden max-w-md mx-auto">
-          <div className="bg-secondary p-4 text-white flex items-center justify-between">
-            <div className="flex items-center">
-              <BookOpen className="h-5 w-5 mr-2" />
-              <span className="font-semibold">Virtuelles Klassenbuch</span>
-            </div>
-            <Calendar className="h-5 w-5" />
-          </div>
-          <div className="p-4">
-            <h4 className="font-semibold mb-3">Klasse 7B - Wochenübersicht</h4>
-            <div className="space-y-3">
-              {subjects.map((subject, index) => (
-                <ClassSubject
-                  key={index}
-                  subject={subject.subject}
-                  attendance={subject.attendance}
-                  topics={subject.topics}
-                  alert={subject.alert}
-                  alertColor={subject.alertColor}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      
       <div className="space-y-6">
         <h3 className="text-2xl font-bold text-gray-900">
           Digitales Klassenbuch immer griffbereit
@@ -141,6 +70,91 @@ const ClassbookTab = () => {
               description={item.description}
             />
           ))}
+        </div>
+      </div>
+      
+      <div className="relative">
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden max-w-md mx-auto">
+          <div className="bg-secondary p-4 text-white flex items-center justify-between">
+            <div className="flex items-center">
+              <BookOpen className="h-5 w-5 mr-2" />
+              <span className="font-semibold">Virtuelles Klassenbuch</span>
+            </div>
+            <Calendar className="h-5 w-5" />
+          </div>
+          
+          <Tabs defaultValue="overview" className="w-full" onValueChange={setActiveTab}>
+            <TabsList className="grid grid-cols-4 p-0 h-auto">
+              <TabsTrigger value="overview" className="text-xs py-2">Übersicht</TabsTrigger>
+              <TabsTrigger value="attendance" className="text-xs py-2">Anwesenheit</TabsTrigger>
+              <TabsTrigger value="assignments" className="text-xs py-2">Aufgaben</TabsTrigger>
+              <TabsTrigger value="performance" className="text-xs py-2">Leistung</TabsTrigger>
+            </TabsList>
+            
+            <div className="p-4">
+              <TabsContent value="overview">
+                <h4 className="font-semibold mb-3">Klasse 7B - Wochenübersicht</h4>
+                <div className="space-y-3">
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Mathematik</span>
+                      <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">92% Anwesenheit</span>
+                    </div>
+                    <p className="text-sm mt-1">Themen: Quadratische Gleichungen, Wahrscheinlichkeit</p>
+                    <div className="flex items-center mt-2 text-sm text-gray-600">
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
+                      <span>Hausaufgabe fällig am Freitag</span>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Naturwissenschaft</span>
+                      <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">96% Anwesenheit</span>
+                    </div>
+                    <p className="text-sm mt-1">Themen: Photosynthese, Zellteilung</p>
+                    <div className="flex items-center mt-2 text-sm text-gray-600">
+                      <div className="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                      <span>Test am Montag</span>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Deutsche Literatur</span>
+                      <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">85% Anwesenheit</span>
+                    </div>
+                    <p className="text-sm mt-1">Themen: Goethes Gedichte</p>
+                    <div className="flex items-center mt-2 text-sm text-gray-600">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-1"></div>
+                      <span>Aufsatzabgabe nächsten Dienstag</span>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="attendance">
+                <AttendanceTracker />
+              </TabsContent>
+              
+              <TabsContent value="assignments">
+                <AssignmentManager />
+              </TabsContent>
+              
+              <TabsContent value="performance">
+                <StudentPerformance />
+              </TabsContent>
+            </div>
+          </Tabs>
+          
+          <div className="border-t p-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-gray-600">Klassenkalender anzeigen</span>
+              <button className="text-secondary text-sm font-medium">
+                Öffnen
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
