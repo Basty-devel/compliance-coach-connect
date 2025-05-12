@@ -41,6 +41,7 @@ const Navbar = () => {
           <a href="#features" className="text-gray-700 hover:text-primary transition-colors">Funktionen</a>
           <a href="#security" className="text-gray-700 hover:text-primary transition-colors">Sicherheit</a>
           <a href="#communication" className="text-gray-700 hover:text-primary transition-colors">Kommunikation</a>
+          <Link to="/training" className="text-gray-700 hover:text-primary transition-colors">Training</Link>
           
           {isAuthenticated ? (
             <div className="flex items-center gap-4">
@@ -94,6 +95,13 @@ const Navbar = () => {
             >
               Kommunikation
             </a>
+            <Link 
+              to="/training" 
+              className="text-gray-700 hover:text-primary transition-colors py-2"
+              onClick={toggleMobileMenu}
+            >
+              Training
+            </Link>
             
             {isAuthenticated ? (
               <>

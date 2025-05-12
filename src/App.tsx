@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Training from "./pages/Training";
+import TrainingModule from "./pages/TrainingModule";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route path="/training" element={<Training />} />
+            <Route path="/training/module/:moduleId" element={<TrainingModule />} />
             
             {/* Protected routes */}
             <Route element={<ProtectedRoute />}>
