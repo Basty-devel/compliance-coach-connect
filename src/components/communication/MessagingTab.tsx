@@ -1,5 +1,21 @@
 
-import { Bell, MessageCircle, User, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Bell, MessageCircle, User, CheckCircle2, Send, AlertTriangle } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import ComposeMessage from './messaging/ComposeMessage';
+import MessagePreview from './messaging/MessagePreview';
+import NotificationSettings from './messaging/NotificationSettings';
+import { useUser } from '@/context/UserContext';
 
 const MessagingFeatureItem = ({ 
   icon: Icon, 
@@ -23,30 +39,11 @@ const MessagingFeatureItem = ({
   );
 };
 
-const MessagePreview = ({ 
-  title, 
-  message, 
-  time, 
-  sender 
-}: { 
-  title: string; 
-  message: string; 
-  time: string; 
-  sender: string;
-}) => {
-  return (
-    <div className="bg-gray-50 rounded-lg p-3">
-      <div className="flex justify-between items-start">
-        <h5 className="font-semibold text-gray-900">{title}</h5>
-        <span className="text-sm text-gray-500">{time}</span>
-      </div>
-      <p className="text-gray-700 text-sm mt-1">{message}</p>
-      <div className="mt-2 text-xs text-right text-gray-500">Von: {sender}</div>
-    </div>
-  );
-};
-
 const MessagingTab = () => {
+  const [activeTab, setActiveTab] = useState('inbox');
+  const { toast } = useToast();
+  const { hasRole } = useUser();
+  
   const messagingFeatures = [
     {
       icon: Bell,
@@ -67,18 +64,43 @@ const MessagingTab = () => {
 
   const messages = [
     {
+      id: 1,
       title: "Mathe-Test morgen",
       message: "Bitte erinnern Sie Emma daran, ihren Taschenrechner für den morgigen Mathetest mitzubringen, der die Kapitel 5-7 abdeckt.",
       time: "10:30 Uhr",
-      sender: "Herr Schmidt"
+      sender: "Herr Schmidt",
+      category: "academic",
+      priority: "normal",
+      status: "sent"
     },
     {
+      id: 2,
       title: "Genehmigung für Ausflug",
       message: "Der Erlaubnisschein für den Ausflug zum Wissenschaftsmuseum muss bis Freitag eingereicht werden. Bitte unterschreiben und mit Emma zurücksenden.",
       time: "Gestern",
-      sender: "Schulverwaltung"
+      sender: "Schulverwaltung",
+      category: "event",
+      priority: "high",
+      status: "read"
+    },
+    {
+      id: 3,
+      title: "Fehlende Hausaufgabe",
+      message: "Emma hat die Mathematik-Hausaufgabe von gestern nicht eingereicht. Bitte stellen Sie sicher, dass sie diese morgen abgibt.",
+      time: "Vor 2 Tagen",
+      sender: "Frau Müller",
+      category: "academic",
+      priority: "urgent",
+      status: "unread"
     }
   ];
+
+  const handleSendMessage = (messageData: any) => {
+    toast({
+      title: "Nachricht gesendet",
+      description: `Ihre Nachricht wurde an die Eltern von ${messageData.student} gesendet.`,
+    });
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -101,6 +123,30 @@ const MessagingTab = () => {
             />
           ))}
         </div>
+
+        {hasRole(['teacher', 'admin']) && (
+          <div className="mt-6 p-4 bg-accent/5 rounded-lg border border-accent/10">
+            <h4 className="font-medium text-accent mb-2">Schnellzugriff für Lehrer</h4>
+            <div className="grid grid-cols-2 gap-3">
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-start"
+                onClick={() => setActiveTab('compose')}
+              >
+                <Send className="h-4 w-4 mr-2" />
+                Nachricht verfassen
+              </Button>
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-start"
+                onClick={() => setActiveTab('settings')}
+              >
+                <Bell className="h-4 w-4 mr-2" />
+                Benachrichtigungen
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
       
       <div className="relative order-1 lg:order-2">
@@ -112,21 +158,62 @@ const MessagingTab = () => {
             </div>
             <Bell className="h-5 w-5" />
           </div>
-          <div className="p-4 space-y-4">
-            {messages.map((message, i) => (
-              <MessagePreview
-                key={i}
-                title={message.title}
-                message={message.message}
-                time={message.time}
-                sender={message.sender}
-              />
-            ))}
-            
-            <div className="h-10 flex items-center justify-center border-t text-primary text-sm font-medium cursor-pointer">
-              Alle Nachrichten anzeigen
+          
+          {hasRole(['teacher', 'admin']) ? (
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <TabsList className="grid grid-cols-3 p-2 mx-4 mt-2">
+                <TabsTrigger value="inbox">Eingang</TabsTrigger>
+                <TabsTrigger value="compose">Verfassen</TabsTrigger>
+                <TabsTrigger value="settings">Einstellungen</TabsTrigger>
+              </TabsList>
+              
+              <div className="p-4">
+                <TabsContent value="inbox" className="space-y-4">
+                  {messages.map((message) => (
+                    <MessagePreview
+                      key={message.id}
+                      title={message.title}
+                      message={message.message}
+                      time={message.time}
+                      sender={message.sender}
+                      priority={message.priority}
+                      category={message.category}
+                    />
+                  ))}
+                  
+                  <div className="h-10 flex items-center justify-center border-t text-primary text-sm font-medium cursor-pointer">
+                    Alle Nachrichten anzeigen
+                  </div>
+                </TabsContent>
+                
+                <TabsContent value="compose">
+                  <ComposeMessage onSend={handleSendMessage} />
+                </TabsContent>
+                
+                <TabsContent value="settings">
+                  <NotificationSettings />
+                </TabsContent>
+              </div>
+            </Tabs>
+          ) : (
+            <div className="p-4 space-y-4">
+              {messages.map((message) => (
+                <MessagePreview
+                  key={message.id}
+                  title={message.title}
+                  message={message.message}
+                  time={message.time}
+                  sender={message.sender}
+                  priority={message.priority}
+                  category={message.category}
+                />
+              ))}
+              
+              <div className="h-10 flex items-center justify-center border-t text-primary text-sm font-medium cursor-pointer">
+                Alle Nachrichten anzeigen
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
