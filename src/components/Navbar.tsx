@@ -2,14 +2,28 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Shield, Menu, X, User } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, UNSAFE_NavigationContext } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import { useToast } from '@/hooks/use-toast';
+
+// Safe useNavigate hook: returns a noop if not in router context
+function useSafeNavigate() {
+  const context = React.useContext(UNSAFE_NavigationContext);
+  try {
+    // If context is present, we're inside a Router
+    if (context) {
+      return useNavigate();
+    }
+    // eslint-disable-next-line no-empty
+  } catch {}
+  // Fallback: return a dummy function
+  return () => {};
+}
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const { isAuthenticated, user, logout } = useUser();
-  const navigate = useNavigate();
+  const navigate = useSafeNavigate();
   const { toast } = useToast();
 
   const toggleMobileMenu = () => {
@@ -129,3 +143,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
