@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,7 @@ import Unauthorized from "./pages/Unauthorized";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Training from "./pages/Training";
 import TrainingModule from "./pages/TrainingModule";
+import ComplianceDashboard from "./pages/ComplianceDashboard";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +29,8 @@ const App = () => (
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="/training" element={<Training />} />
             <Route path="/training/module/:moduleId" element={<TrainingModule />} />
+            {/* New Compliance Monitoring Dashboard */}
+            <Route path="/compliance-dashboard" element={<ComplianceDashboard />} />
             
             {/* Protected routes */}
             <Route element={<ProtectedRoute />}>
