@@ -1,11 +1,13 @@
-
 import React from 'react';
 import { useUser } from '../context/UserContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Shield, Lock, CheckCircle2, User, Users, BookOpen } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Shield, Lock, CheckCircle2, User, Users, BookOpen, Trash, Edit, Plus, AlertTriangle, Info } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
+import { mockUsers, mockFrameworks, mockAlerts, mockTasks } from "@/mocks/complianceMockData";
+import type { User as MockUser, ComplianceTask } from "@/types/complianceModels";
 
 const Dashboard = () => {
   const { user, logout } = useUser();
@@ -21,49 +23,221 @@ const Dashboard = () => {
     navigate('/');
   };
 
+  // Mock admin-table actions (demo only!)
+  const handleMockEdit = (u: MockUser) => {
+    toast({ title: "Demo-Aktion", description: `${u.name} (Rolle: ${u.role}) bearbeiten (Demo)`, });
+  };
+  const handleMockDelete = (u: MockUser) => {
+    toast({ title: "Demo-Aktion", description: `${u.name} wurde entfernt (nur Demo!)`, variant: "destructive" });
+  };
+  const handleMockAssignTask = (task: ComplianceTask) => {
+    toast({ title: "Demo-Aufgabe zugewiesen", description: `"${task.title}" (nur Demo!)` });
+  };
+
   // Different dashboard content based on user role
   const renderRoleSpecificContent = () => {
     switch (user?.role) {
       case 'admin':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Shield className="h-5 w-5 mr-2" />
-                  Compliance-Status
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-2xl font-bold">94%</p>
-                <p className="text-sm text-muted-foreground">DSGVO, ISO 27001, NIS2</p>
-              </CardContent>
-            </Card>
-            <Card>
+          <>
+            {/* Admin Quick Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Shield className="h-5 w-5 mr-2" />
+                    Compliance-Status
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold">94%</p>
+                  <p className="text-sm text-muted-foreground">DSGVO, ISO 27001, NIS2</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Users className="h-5 w-5 mr-2" />
+                    Benutzerübersicht
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold">248</p>
+                  <p className="text-sm text-muted-foreground">Aktive Benutzer</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Lock className="h-5 w-5 mr-2" />
+                    Sicherheitsaudits
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold">12</p>
+                  <p className="text-sm text-muted-foreground">Ausstehende Überprüfungen</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Admin: User Management */}
+            <Card className="mb-8">
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Users className="h-5 w-5 mr-2" />
-                  Benutzerübersicht
+                  Benutzerverwaltung (Demo)
+                  <span className="ml-2 text-xs text-muted-foreground font-normal">(keine echten Aktionen)</span>
                 </CardTitle>
+                <CardDescription>Verwalten Sie alle Demo-Benutzer im System.</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold">248</p>
-                <p className="text-sm text-muted-foreground">Aktive Benutzer</p>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead>E-Mail</TableHead>
+                        <TableHead>Rolle</TableHead>
+                        <TableHead>Aktionen</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {mockUsers.map((u) => (
+                        <TableRow key={u.id}>
+                          <TableCell>{u.name}</TableCell>
+                          <TableCell>{u.email}</TableCell>
+                          <TableCell className="capitalize">{u.role}</TableCell>
+                          <TableCell>
+                            <Button variant="ghost" size="icon" onClick={() => handleMockEdit(u)}>
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                            <Button variant="ghost" size="icon" onClick={() => handleMockDelete(u)}>
+                              <Trash className="w-4 h-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+                <div className="mt-2 flex justify-end">
+                  <Button variant="secondary" size="sm">
+                    <Plus className="w-4 h-4 mr-1" /> Benutzer hinzufügen (Demo)
+                  </Button>
+                </div>
               </CardContent>
             </Card>
-            <Card>
+
+            {/* Admin: Compliance Alerts */}
+            <Card className="mb-8">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Lock className="h-5 w-5 mr-2" />
-                  Sicherheitsaudits
+                  <AlertTriangle className="h-5 w-5 mr-2 text-yellow-500" />
+                  Compliance-Warnungen (Demo)
                 </CardTitle>
+                <CardDescription>Aktuelle Warnungen und Meldungen im System</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold">12</p>
-                <p className="text-sm text-muted-foreground">Ausstehende Überprüfungen</p>
+                {mockAlerts.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">Keine aktuellen Warnungen.</p>
+                ) : (
+                  <ul className="space-y-2">
+                    {mockAlerts.map((alert) => (
+                      <li key={alert.id} className={`p-3 rounded-md flex items-start gap-3 ${alert.type === "critical" ? "bg-red-50" : alert.type === "warning" ? "bg-yellow-50" : "bg-blue-50"}`}>
+                        {alert.type === "critical" ? (
+                          <AlertTriangle className="text-red-500" />
+                        ) : alert.type === "warning" ? (
+                          <AlertTriangle className="text-yellow-500" />
+                        ) : (
+                          <Info className="text-blue-500" />
+                        )}
+                        <div>
+                          <div className="font-medium">{alert.message}</div>
+                          <div className="text-xs text-gray-500">{new Date(alert.time).toLocaleString()} • {alert.framework}</div>
+                          {alert.resolved && (
+                            <span className="inline-block text-xs rounded px-2 ml-2 bg-green-100 text-green-700">Behoben</span>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </CardContent>
             </Card>
-          </div>
+
+            {/* Admin: Compliance Frameworks */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Shield className="h-5 w-5 mr-2" />
+                  Compliance-Frameworks (Demo)
+                  <span className="ml-1 text-xs text-muted-foreground">(nur Anzeige)</span>
+                </CardTitle>
+                <CardDescription>Verfügbare Frameworks im System.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="flex gap-6 flex-wrap">
+                  {mockFrameworks.map(fw => (
+                    <li key={fw} className="bg-gray-100 rounded px-4 py-2 font-medium shadow-sm">{fw}</li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Admin: Task Assignment */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <CheckCircle2 className="h-5 w-5 mr-2" />
+                  Aufgabenverwaltung (Demo)
+                </CardTitle>
+                <CardDescription>Bestehende Compliance-Aufgaben und scheindemo Zuweisen.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Aufgabe</TableHead>
+                        <TableHead>Beschreibung</TableHead>
+                        <TableHead>Framework</TableHead>
+                        <TableHead>Beteiligter</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Aktionen</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {mockTasks.map(task => (
+                        <TableRow key={task.id}>
+                          <TableCell>{task.title}</TableCell>
+                          <TableCell>{task.description}</TableCell>
+                          <TableCell>{task.framework}</TableCell>
+                          <TableCell>
+                            {mockUsers.find(u => u.id === task.assignedTo)?.name || "Niemand"}
+                          </TableCell>
+                          <TableCell>
+                            <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${
+                              task.status === "completed" ? "bg-green-100 text-green-800" :
+                              task.status === "in-progress" ? "bg-yellow-100 text-yellow-700" :
+                              task.status === "overdue" ? "bg-red-100 text-red-700" :
+                              "bg-gray-100 text-gray-600"
+                            }`}>
+                              {task.status}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <Button variant="ghost" size="icon" onClick={() => handleMockAssignTask(task)}>
+                              <Plus className="w-4 h-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </>
         );
       case 'teacher':
         return (
